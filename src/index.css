@@ -215,4 +215,43 @@ All colors MUST be HSL for proper theming.
       radial-gradient(circle at 80% 20%, hsl(var(--gold) / 0.1) 0%, transparent 50%),
       radial-gradient(circle at 40% 80%, hsl(var(--coral) / 0.1) 0%, transparent 50%);
   }
+
+  /* Fintech Animation Effects */
+  .fintech-animation {
+    animation: subtle-drift 20s ease-in-out infinite;
+  }
+
+  @keyframes subtle-drift {
+    0%, 100% { transform: scale(1.1) translateX(0px) translateY(0px); }
+    25% { transform: scale(1.12) translateX(-10px) translateY(-5px); }
+    50% { transform: scale(1.11) translateX(5px) translateY(-10px); }
+    75% { transform: scale(1.13) translateX(-5px) translateY(5px); }
+  }
+
+  .data-flow-animation {
+    animation: data-flow-horizontal 15s linear infinite;
+  }
+
+  @keyframes data-flow-horizontal {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+  }
+
+  .data-flow-vertical {
+    animation: data-flow-vertical 18s linear infinite;
+  }
+
+  @keyframes data-flow-vertical {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(100%); }
+  }
+
+  .financial-data-point {
+    animation: float-data 6s ease-in-out infinite;
+  }
+
+  @keyframes float-data {
+    0%, 100% { transform: translateY(0px) scale(1); opacity: 0.6; }
+    50% { transform: translateY(-30px) scale(1.1); opacity: 1; }
+  }
 }

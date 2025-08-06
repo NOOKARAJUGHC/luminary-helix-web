@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import heroImage from '@/assets/dynamic-hero.jpg';
+import heroImage from '@/assets/fintech-hero.jpg';
 
 const HeroSection = () => {
   const parallaxRef = useRef<HTMLDivElement>(null);
@@ -37,10 +37,10 @@ const HeroSection = () => {
 
   return (
     <section className="relative h-screen flex items-center justify-center overflow-hidden particle-bg">
-      {/* Dynamic Parallax Background */}
+      {/* Animated Fintech Background */}
       <div
         ref={parallaxRef}
-        className="absolute inset-0 parallax-container transition-transform duration-75 ease-out"
+        className="absolute inset-0 parallax-container transition-transform duration-75 ease-out fintech-animation"
         style={{
           backgroundImage: `url(${heroImage})`,
           backgroundSize: 'cover',
@@ -51,19 +51,29 @@ const HeroSection = () => {
         }}
       />
       
-      {/* Floating Particles */}
+      {/* Data Flow Animation Overlay */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(6)].map((_, i) => (
+        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/5 to-transparent data-flow-animation" />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-gold/5 to-transparent data-flow-vertical" />
+      </div>
+      
+      {/* Floating Financial Data Points */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {[...Array(8)].map((_, i) => (
           <div
             key={i}
-            className="absolute w-2 h-2 bg-primary/30 rounded-full animate-pulse"
+            className="absolute financial-data-point"
             style={{
-              left: `${20 + i * 15}%`,
-              top: `${30 + (i % 3) * 20}%`,
-              animationDelay: `${i * 0.5}s`,
-              animationDuration: `${3 + i}s`,
+              left: `${15 + i * 12}%`,
+              top: `${25 + (i % 4) * 15}%`,
+              animationDelay: `${i * 0.7}s`,
+              animationDuration: `${4 + i * 0.5}s`,
             }}
-          />
+          >
+            <div className="w-3 h-3 bg-primary/40 rounded-full pulse-glow" />
+            <div className="absolute -top-1 -left-1 w-5 h-5 border border-gold/30 rounded-full animate-spin" 
+                 style={{ animationDuration: `${3 + i}s` }} />
+          </div>
         ))}
       </div>
 
