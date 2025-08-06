@@ -1,36 +1,71 @@
-import { useEffect, useRef } from 'react';
-import heroImage from '@/assets/ai-hero.jpg';
+import { useEffect, useRef, useState } from 'react';
+import heroImage from '@/assets/dynamic-hero.jpg';
 
 const HeroSection = () => {
   const parallaxRef = useRef<HTMLDivElement>(null);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
     const handleScroll = () => {
       if (parallaxRef.current) {
         const scrolled = window.pageYOffset;
-        const rate = scrolled * -0.5;
-        parallaxRef.current.style.transform = `translateY(${rate}px)`;
+        const rate = scrolled * -0.3;
+        parallaxRef.current.style.transform = `translateY(${rate}px) translateX(${mousePosition.x * 0.02}px) scale(1.1)`;
+      }
+    };
+
+    const handleMouseMove = (e: MouseEvent) => {
+      const x = (e.clientX - window.innerWidth / 2) / 50;
+      const y = (e.clientY - window.innerHeight / 2) / 50;
+      setMousePosition({ x, y });
+      
+      if (parallaxRef.current) {
+        const scrolled = window.pageYOffset;
+        const rate = scrolled * -0.3;
+        parallaxRef.current.style.transform = `translateY(${rate}px) translateX(${x}px) translateZ(${y * 0.5}px) scale(1.1)`;
       }
     };
 
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+    window.addEventListener('mousemove', handleMouseMove);
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('mousemove', handleMouseMove);
+    };
+  }, [mousePosition.x]);
 
   return (
     <section className="relative h-screen flex items-center justify-center overflow-hidden particle-bg">
-      {/* Parallax Background */}
+      {/* Dynamic Parallax Background */}
       <div
         ref={parallaxRef}
-        className="absolute inset-0 parallax-container"
+        className="absolute inset-0 parallax-container transition-transform duration-75 ease-out"
         style={{
           backgroundImage: `url(${heroImage})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
-          transform: 'scale(1.1)', // Slight scale to prevent white edges during parallax
+          transform: 'scale(1.1)',
+          filter: 'brightness(1.1) contrast(1.05)',
         }}
       />
+      
+      {/* Floating Particles */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {[...Array(6)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute w-2 h-2 bg-primary/30 rounded-full animate-pulse"
+            style={{
+              left: `${20 + i * 15}%`,
+              top: `${30 + (i % 3) * 20}%`,
+              animationDelay: `${i * 0.5}s`,
+              animationDuration: `${3 + i}s`,
+            }}
+          />
+        ))}
+      </div>
 
       {/* Overlay */}
       <div className="absolute inset-0 bg-background/20" />
