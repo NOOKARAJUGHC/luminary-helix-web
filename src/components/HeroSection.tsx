@@ -59,20 +59,20 @@ const HeroSection = () => {
       
       {/* Floating Financial Data Points */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(8)].map((_, i) => (
+        {[...Array(12)].map((_, i) => (
           <div
             key={i}
             className="absolute financial-data-point"
             style={{
-              left: `${15 + i * 12}%`,
-              top: `${25 + (i % 4) * 15}%`,
-              animationDelay: `${i * 0.7}s`,
-              animationDuration: `${4 + i * 0.5}s`,
+              left: `${8 + i * 8}%`,
+              top: `${20 + (i % 5) * 12}%`,
+              animationDelay: `${i * 1.2}s`,
+              animationDuration: `${8 + i * 0.8}s`,
             }}
           >
-            <div className="w-3 h-3 bg-primary/40 rounded-full pulse-glow" />
-            <div className="absolute -top-1 -left-1 w-5 h-5 border border-gold/30 rounded-full animate-spin" 
-                 style={{ animationDuration: `${3 + i}s` }} />
+            <div className="w-2 h-2 bg-primary/30 rounded-full pulse-glow" />
+            <div className="absolute -top-1 -left-1 w-4 h-4 border border-gold/20 rounded-full animate-spin" 
+                 style={{ animationDuration: `${6 + i * 2}s` }} />
           </div>
         ))}
       </div>
