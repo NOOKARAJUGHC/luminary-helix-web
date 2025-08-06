@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import heroImage from '@/assets/fintech-hero.jpg';
+import heroImage from '@/assets/fintech-animated.jpg';
 
 const HeroSection = () => {
   const parallaxRef = useRef<HTMLDivElement>(null);
